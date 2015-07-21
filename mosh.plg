@@ -9,8 +9,7 @@
 <!ENTITY gitURL      "https://raw.githubusercontent.com/&author;/unraid-mosh/master">
 <!ENTITY plugdir     "/usr/local/emhttp/plugins/&name;">
 <!ENTITY pkgdir      "/boot/packages">
-<!ENTITY pkghost     "http://mirrors1.kernel.org/slackware/slackware64-14.1/slackware64">
-<!ENTITY pkghost     "http://slackonly.com/pub/packages/14.1-x86_64/">
+<!ENTITY pkghost     "http://slackonly.com/pub/packages/14.1-x86_64">
 <!ENTITY moshpkg     "mosh-&pkgversion;-x86_64-1_slack.txz">
 <!ENTITY moshpkgmd5  "cf54707796849ee0206385082c9538ec">
 <!ENTITY pbufpkg     "protobuf-2.6.1-x86_64-3_slack.txz">
@@ -51,7 +50,7 @@ You can sleep your laptop for a week, come back, and your connection will still 
 Install prerequisites.
 -->
 <FILE Name="&pkgdir;/&pbufpkg;" Run="upgradepkg --install-new">
-<URL>&pkghost;misc/protobuf/&pbufpkg;</URL>
+<URL>&pkghost;/misc/protobuf/&pbufpkg;</URL>
 <MD5>&pbufpkgmd5;</MD5>
 </FILE>
 
