@@ -1,0 +1,125 @@
+<?xml version='1.0' standalone='yes'?>
+
+<!DOCTYPE PLUGIN [
+<!ENTITY name        "mosh">
+<!ENTITY author      "coppit">
+<!ENTITY version     "2015.07.20">
+<!ENTITY pluginURL   "https://github.com/coppit/unraid-mosh/raw/master/mosh.plg">
+<!ENTITY pkgversion  "1.2.4">
+<!ENTITY gitURL      "https://raw.githubusercontent.com/&author;/unraid-mosh/master">
+<!ENTITY plugdir     "/usr/local/emhttp/plugins/&name;">
+<!ENTITY pkgdir      "/boot/packages">
+<!ENTITY pkghost     "http://mirrors1.kernel.org/slackware/slackware64-14.1/slackware64">
+<!ENTITY pkghost     "http://slackonly.com/pub/packages/14.1-x86_64/">
+<!ENTITY moshpkg     "mosh-&pkgversion;-x86_64-1_slack.txz">
+<!ENTITY moshpkgmd5  "cf54707796849ee0206385082c9538ec">
+<!ENTITY pbufpkg     "protobuf-2.6.1-x86_64-3_slack.txz">
+<!ENTITY pbufpkgmd5  "1cee3a5c6a4434ded1d9065557a9b82a">
+]>
+
+<PLUGIN  name="&name;"
+         author="&author;"
+         version="&version;"
+         pluginURL="&pluginURL;">
+
+<CHANGES>
+##&name;
+
+###2015.06.24
+- Initial unRAID V6 release.
+</CHANGES>
+
+<!--
+
+This plugin provides SNMP support for unRAID systems.
+
+-->
+
+<!--
+create plugin README.md file
+-->
+<FILE Name="&plugdir;/README.md">
+<INLINE>
+###SNMP###
+
+Installs Mosh, the mobile shell. Mosh is an improved SSH, with better responsiveness and reliability.
+You can sleep your laptop for a week, come back, and your connection will still be there.
+</INLINE>
+</FILE>
+
+<!--
+Install prerequisites.
+-->
+<FILE Name="&pkgdir;/&pbufpkg;" Run="upgradepkg --install-new">
+<URL>&pkghost;misc/protobuf/&pbufpkg;</URL>
+<MD5>&pbufpkgmd5;</MD5>
+</FILE>
+
+<!--
+Get the package.
+-->
+<FILE Name="&pkgdir;/&moshpkg;" Run="upgradepkg --install-new">
+<URL>&moshpkghost;/network/mosh/&moshpkg;</URL>
+<MD5>&moshpkgmd5;</MD5>
+</FILE>
+
+<!--
+Fetch an icon
+-->
+<FILE Name="&plugdir;/mosh.png">
+<URL>https://drive.google.com/uc?id=0B_CHo2SsFDY-em9qcGI5anhuQ3M</URL>
+</FILE>
+
+<!--
+The 'post-install' script.
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+echo ""
+echo "-----------------------------------------------------------"
+echo " &name; has been installed."
+echo " Copyright 2015, David Coppit &lt;david@coppit.org&gt;"
+echo " Version: &version;"
+echo "-----------------------------------------------------------"
+echo ""
+</INLINE>
+</FILE>
+
+<!--
+The 'remove' script.
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+echo "+=============================================================================="
+echo "| Uninstalling packages"
+echo "+=============================================================================="
+
+# Delete the package, and any old package files too
+rm -f $(ls &pkgdir;/&name;*.txz 2>/dev/null)
+
+# Delete the prerequisite packages
+rm -f &pkgdir;/&pbufpkg;
+
+# Uninstall the package
+removepkg $(basename &moshpkg; .txz) | grep -v -e '  --&gt; Deleting'
+
+# Don't Uninstall the prerequisites, in case some other plug is using them. On reboot, they'll get "removed" if no plugin
+# needs them, or will be re-downloaded and reinstalled by some plugin that does need them.
+#removepkg $(basename &pbufpkg; .txz) | grep -v -e '  --&gt; Deleting'
+
+echo ""
+echo ""
+
+echo "+=============================================================================="
+echo "| Deleting &plugdir;"
+echo "+=============================================================================="
+
+# Remove plugin.
+rm -rf &plugdir;
+
+echo ""
+echo ""
+</INLINE>
+</FILE>
+
+</PLUGIN>
