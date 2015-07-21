@@ -30,7 +30,7 @@
 
 <!--
 
-This plugin provides SNMP support for unRAID systems.
+This plugin provides Mosh support for unRAID systems.
 
 -->
 
@@ -39,7 +39,7 @@ create plugin README.md file
 -->
 <FILE Name="&plugdir;/README.md">
 <INLINE>
-###SNMP###
+###Mosh###
 
 Installs Mosh, the mobile shell. Mosh is an improved SSH, with better responsiveness and reliability.
 You can sleep your laptop for a week, come back, and your connection will still be there.
