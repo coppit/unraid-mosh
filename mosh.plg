@@ -3,7 +3,7 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name        "mosh">
 <!ENTITY author      "coppit">
-<!ENTITY version     "2015.07.20">
+<!ENTITY version     "2015.07.21">
 <!ENTITY pluginURL   "https://github.com/coppit/unraid-mosh/raw/master/mosh.plg">
 <!ENTITY pkgversion  "1.2.4">
 <!ENTITY gitURL      "https://raw.githubusercontent.com/&author;/unraid-mosh/master">
@@ -24,7 +24,10 @@
 <CHANGES>
 ##&name;
 
-###2015.06.24
+###2015.07.21
+- Add additional documentation
+
+###2015.07.20
 - Initial unRAID V6 release.
 </CHANGES>
 
@@ -43,6 +46,9 @@ create plugin README.md file
 
 Installs Mosh, the mobile shell. Mosh is an improved SSH, with better responsiveness and reliability.
 You can sleep your laptop for a week, come back, and your connection will still be there.
+
+After installing this plugin, visit http://mosh.mit.edu/ and install a client on the computer
+that you wish to connect to the server with.
 </INLINE>
 </FILE>
 
