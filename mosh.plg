@@ -59,7 +59,7 @@ Install prerequisites.
 Get the package.
 -->
 <FILE Name="&pkgdir;/&moshpkg;" Run="upgradepkg --install-new">
-<URL>&moshpkghost;/network/mosh/&moshpkg;</URL>
+<URL>&pkghost;/network/mosh/&moshpkg;</URL>
 <MD5>&moshpkgmd5;</MD5>
 </FILE>
 
