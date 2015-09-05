@@ -74,7 +74,7 @@ Install prerequisites.
 <MD5>&pbufpkgmd5;</MD5>
 </FILE>
 
-<FILE Name="&plugin;/&utemppkg;" Run="/sbin/upgradepkg --install-new">
+<FILE Name="&pkgdir;/&utemppkg;" Run="/sbin/upgradepkg --install-new">
 <URL>&pkghost;/&utemppkg;</URL>
 <MD5>&utemppkgmd5;</MD5>
 </FILE>
