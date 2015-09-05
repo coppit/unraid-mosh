@@ -3,17 +3,25 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name        "mosh">
 <!ENTITY author      "coppit">
-<!ENTITY version     "2015.07.21">
+<!ENTITY version     "2015.09.04">
 <!ENTITY pluginURL   "https://github.com/coppit/unraid-mosh/raw/master/mosh.plg">
 <!ENTITY pkgversion  "1.2.4">
 <!ENTITY gitURL      "https://raw.githubusercontent.com/&author;/unraid-mosh/master">
 <!ENTITY plugdir     "/usr/local/emhttp/plugins/&name;">
 <!ENTITY pkgdir      "/boot/packages">
-<!ENTITY pkghost     "http://slackonly.com/pub/packages/14.1-x86_64">
+<!ENTITY pkghost     "&gitURL;/packages">
+
 <!ENTITY moshpkg     "mosh-&pkgversion;-x86_64-1_slack.txz">
 <!ENTITY moshpkgmd5  "cf54707796849ee0206385082c9538ec">
+
 <!ENTITY pbufpkg     "protobuf-2.6.1-x86_64-3_slack.txz">
 <!ENTITY pbufpkgmd5  "1cee3a5c6a4434ded1d9065557a9b82a">
+
+<!ENTITY utemppkg    "utempter-1.1.5-x86_64-1.txz">
+<!ENTITY utemppkgmd5 "dbbe884ebb29b830e4032cc41c3f679a">
+
+<!ENTITY iconfile    "mosh.png">
+<!ENTITY iconfilemd5 "7c3403cdca386e4af91e6576860dc547">
 ]>
 
 <PLUGIN  name="&name;"
@@ -23,6 +31,12 @@
 
 <CHANGES>
 ##&name;
+
+Warning! Uninstalling NerdPack will break this plugin. If that happens, reboot your server or reinstall this plugin.
+
+###2015.09.04
+- Add missing libutempter prerequisite
+- Store packages in github for better reliability
 
 ###2015.07.21
 - Add additional documentation
@@ -56,23 +70,29 @@ that you wish to connect to the server with.
 Install prerequisites.
 -->
 <FILE Name="&pkgdir;/&pbufpkg;" Run="upgradepkg --install-new">
-<URL>&pkghost;/misc/protobuf/&pbufpkg;</URL>
+<URL>&pkghost;/&pbufpkg;</URL>
 <MD5>&pbufpkgmd5;</MD5>
 </FILE>
 
+<FILE Name="&plugin;/&utemppkg;" Run="/sbin/upgradepkg --install-new">
+<URL>&pkghost;/&utemppkg;</URL>
+<MD5>&utemppkgmd5;</MD5>
+</FILE>
+
 <!--
-Get the package.
+Get the mosh package.
 -->
 <FILE Name="&pkgdir;/&moshpkg;" Run="upgradepkg --install-new">
-<URL>&pkghost;/network/mosh/&moshpkg;</URL>
+<URL>&pkghost;/&moshpkg;</URL>
 <MD5>&moshpkgmd5;</MD5>
 </FILE>
 
 <!--
 Fetch an icon
 -->
-<FILE Name="&plugdir;/mosh.png">
-<URL>https://drive.google.com/uc?id=0B_CHo2SsFDY-em9qcGI5anhuQ3M</URL>
+<FILE Name="&plugdir;/&iconfile;">
+<URL>&gitURL;/&iconfile;</URL>
+<MD5>&iconfilemd5;</MD5>
 </FILE>
 
 <!--
@@ -104,13 +124,15 @@ rm -f $(ls &pkgdir;/&name;*.txz 2>/dev/null)
 
 # Delete the prerequisite packages
 rm -f &pkgdir;/&pbufpkg;
+rm -f &pkgdir;/&utemppkg;
 
 # Uninstall the package
 removepkg $(basename &moshpkg; .txz) | grep -v -e '  --&gt; Deleting'
 
-# Don't Uninstall the prerequisites, in case some other plug is using them. On reboot, they'll get "removed" if no plugin
+# Don't uninstall the prerequisites, in case some other plug is using them. On reboot, they'll get "removed" if no plugin
 # needs them, or will be re-downloaded and reinstalled by some plugin that does need them.
-#removepkg $(basename &pbufpkg; .txz) | grep -v -e '  --&gt; Deleting'
+#removepkg $(basename &pbufpkg; .txz) &utemppkg; .txz) | grep -v -e '  --&gt; Deleting'
+#removepkg $(basename &utemppkg; .txz) | grep -v -e '  --&gt; Deleting'
 
 echo ""
 echo ""
