@@ -99,6 +99,16 @@ Fetch an icon
 </FILE>
 
 <!--
+Fix permissions on &plugdir;
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+chmod o+rx &plugdir;
+</INLINE>
+</FILE>
+
+
+<!--
 The 'post-install' script.
 -->
 <FILE Run="/bin/bash">
