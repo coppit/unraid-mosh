@@ -17,8 +17,8 @@
 <!ENTITY pbufpkg     "protobuf-2.6.1-x86_64-3_slack.txz">
 <!ENTITY pbufpkgmd5  "1cee3a5c6a4434ded1d9065557a9b82a">
 
-<!ENTITY utemppkg    "utempter-1.1.5-x86_64-1.txz">
-<!ENTITY utemppkgmd5 "dbbe884ebb29b830e4032cc41c3f679a">
+<!ENTITY utemppkg    "utempter-1.1.6-x86_64-2.txz">
+<!ENTITY utemppkgmd5 "aed1f39d4a5acddb225b542145e0eeaf">
 
 <!ENTITY iconfile    "mosh.png">
 <!ENTITY iconfilemd5 "7c3403cdca386e4af91e6576860dc547">
@@ -33,6 +33,9 @@
 ##&name;
 
 Warning! Uninstalling NerdPack will break this plugin. If that happens, reboot your server or reinstall this plugin.
+
+###2018.07.22
+- Upgrade to latest utempter that NerdPack installs (to avoid downgrading it)
 
 ###2015.09.04
 - Add missing libutempter prerequisite
