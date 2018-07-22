@@ -5,7 +5,7 @@
 <!ENTITY author      "coppit">
 <!ENTITY version     "2018.07.22">
 <!ENTITY pluginURL   "https://github.com/coppit/unraid-mosh/raw/master/mosh.plg">
-<!ENTITY pkgversion  "1.2.5">
+<!ENTITY pkgversion  "1.2.4">
 <!ENTITY gitURL      "https://raw.githubusercontent.com/&author;/unraid-mosh/master">
 <!ENTITY plugdir     "/usr/local/emhttp/plugins/&name;">
 <!ENTITY pkgdir      "/boot/packages">
